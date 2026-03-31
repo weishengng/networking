@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Classmate Directory</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 30%;
+      background: #2c3e50;
+      color: white;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+    }
+
+    .name {
+      padding: 10px;
+      margin: 5px 0;
+      background: #34495e;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .name:hover {
+      background: #1abc9c;
+    }
+
+    .content {
+      width: 70%;
+      padding: 20px;
+    }
+
+    .card {
+      background: #ecf0f1;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Classmates</h2>
+    <div id="list"></div>
+  </div>
+
+  <div class="content">
+    <h2>Information</h2>
+    <div class="card" id="info">
+      Click a name to see details
+    </div>
+  </div>
+
+  <script>
+    const classmates = [
+      {
+        name: "John Doe",
+        country: "USA",
+        town: "New York",
+        common: "Both IT majors",
+        unique: "Loves gaming",
+        contact: "john@email.com"
+      },
+      {
+        name: "Jane Smith",
+        country: "Malaysia",
+        town: "Penang",
+        common: "Same class",
+        unique: "Plays guitar",
+        contact: "jane@email.com"
+      }
+      // ADD MORE CLASSMATES HERE
+    ];
+
+    const listDiv = document.getElementById("list");
+    const infoDiv = document.getElementById("info");
+
+    classmates.forEach((person, index) => {
+      const div = document.createElement("div");
+      div.className = "name";
+      div.innerText = person.name;
+
+      div.onclick = () => {
+        infoDiv.innerHTML = `
+          <h3>${person.name}</h3>
+          <p><b>Country:</b> ${person.country}</p>
+          <p><b>Town:</b> ${person.town}</p>
+          <p><b>Something in Common:</b> ${person.common}</p>
+          <p><b>Something Unique:</b> ${person.unique}</p>
+          <p><b>Contact:</b> ${person.contact}</p>
+        `;
+      };
+
+      listDiv.appendChild(div);
+    });
+  </script>
+
+</body>
+</html>
