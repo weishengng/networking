@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Classmate Directory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -328,7 +329,7 @@
     classmates.forEach((person, index) => {
       const div = document.createElement("div");
       div.className = "name";
-      div.innerText = (index + 1) + ". " + person.name;
+      div.innerHTML = `<span style="color:#00eaff; text-shadow:0 0 8px #00eaff;">${index + 1}.</span> ${person.name}`;
 
       div.onclick = () => {
         infoDiv.innerHTML = `
