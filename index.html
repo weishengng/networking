@@ -291,13 +291,11 @@
   z-index: 999; /* 👈 ADD THIS */
 }
 
-   .intro-panel {
-  position: absolute;
-  top: 5px;
-  left: 480px; /* adjust based on your sidebar width */
-  width: 220px;
-  text-align: center;
-  z-index: 2;
+  .intro-panel {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
 }
 .intro-panel button {
   display: inline-block;
@@ -319,13 +317,16 @@
 }
 
 .intro-box {
-  margin-top: 10px;
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  width: 220px;
+  z-index: 1000;
+
   padding: 15px;
   border: 1px solid #00eaff;
   box-shadow: 0 0 15px #00eaff;
-  background: rgba(0,0,0,0.9);
-  width: 200px;
-  position: relative;
+  background: rgba(0,0,0,0.95);
 }
     .close-btn {
   position: absolute;
@@ -443,8 +444,12 @@
 </head>
 
 <body>
-
-  <div class="intro-panel">
+  
+  <div class="header">
+  <h1 class="main-title">BUSM 371</h1>
+  <p class="sub-title" id="systemText"></p>
+  
+    <div class="intro-panel">
     <button onclick="showInfo('teacher')">Professor</button>
     <button onclick="showInfo('developer')">Developer</button>
 
@@ -453,10 +458,7 @@
       <div id="introContent"></div>
     </div>
   </div>
-  
-  <div class="header">
-  <h1 class="main-title">BUSM 371</h1>
-  <p class="sub-title" id="systemText"></p></div>
+  </div>
   <div class="sidebar">
     <h2>Classmates</h2>
     <input type="text" id="search" placeholder="Search..." class="search-bar">
