@@ -691,21 +691,26 @@ async function processAI(input) {
   }
 }
 
-    const aiPanel = document.getElementById("aiPanel");
-const aiTab = document.getElementById("aiTab");
-const minBtn = document.getElementById("minBtn");
+   document.addEventListener("DOMContentLoaded", () => {
+  const aiPanel = document.getElementById("aiPanel");
+  const aiTab = document.getElementById("aiTab");
+  const minBtn = document.getElementById("minBtn");
 
-// minimize
-minBtn.onclick = () => {
-  aiPanel.style.display = "none";
-  aiTab.style.display = "block";
-};
+  // safety check
+  if (!aiPanel || !aiTab || !minBtn) return;
 
-// restore
-aiTab.onclick = () => {
-  aiPanel.style.display = "flex";
-  aiTab.style.display = "none";
-};
+  // minimize
+  minBtn.onclick = () => {
+    aiPanel.style.display = "none";
+    aiTab.style.display = "block";
+  };
+
+  // restore
+  aiTab.onclick = () => {
+    aiPanel.style.display = "flex";
+    aiTab.style.display = "none";
+  };
+});
   </script>
 
 </body>
