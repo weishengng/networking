@@ -691,24 +691,6 @@ async function processAI(input) {
   }
 }
 
-    const data = await response.json();
-
-    console.log("AI response:", data);
-
-    if (data.error) {
-      // retry delay
-      await new Promise(r => setTimeout(r, 1500));
-      return "System busy. Try again in a moment.";
-    }
-
-    return data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
-
-  } catch (error) {
-    console.error(error);
-    return "System error. Try again.";
-  }
-}
-
    document.addEventListener("DOMContentLoaded", () => {
   const aiPanel = document.getElementById("aiPanel");
   const aiTab = document.getElementById("aiTab");
