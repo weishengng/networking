@@ -303,7 +303,8 @@
   display: inline-block;
   width: auto;
   margin: 6px 0;
-  padding: 8px;
+  padding: 6px 8px;
+  font-size: 10px;
   background: black;
   border: 1px solid #00eaff;
   color: #00eaff;
@@ -399,7 +400,13 @@
     
       /* Intro panel fix */
       .intro-panel {
-        display: none; /* 👈 optional (clean mobile UI) */
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: auto;
+        display: flex;
+        gap: 6px;
+        z-index: 1000;
       }
     
       /* AI panel stays floating (NOT full width) */
