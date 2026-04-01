@@ -295,10 +295,54 @@
 
   z-index: 999; /* 👈 ADD THIS */
 }
+
+    .intro-panel {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+}
+
+.intro-panel button {
+  margin: 5px;
+  padding: 8px 15px;
+  background: black;
+  border: 1px solid #00eaff;
+  color: #00eaff;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 10px #00eaff;
+}
+
+.intro-panel button:hover {
+  background: #00eaff;
+  color: black;
+}
+
+.intro-box {
+  margin-top: 10px;
+  padding: 15px;
+  border: 1px solid #00eaff;
+  box-shadow: 0 0 15px #00eaff;
+  background: rgba(0,0,0,0.9);
+  width: 300px;
+}
   </style>
 </head>
 
 <body>
+
+  <div class="intro-panel">
+    <button onclick="showInfo('teacher')">Teacher</button>
+    <button onclick="showInfo('developer')">Developer</button>
+  
+    <div id="introBox" class="intro-box">
+      Select a button to view info
+    </div>
+  </div>
+  
   <div class="header">
   <h1 class="main-title">BUSM 371</h1>
   <p class="sub-title" id="systemText"></p></div>
@@ -704,9 +748,32 @@ aiTab.onclick = () => {
   aiTab.style.display = "none";
 };
 });
+
+    function showInfo(type) {
+  const box = document.getElementById("introBox");
+
+  if (type === "teacher") {
+    box.innerHTML = `
+      <b>Teacher</b><br>
+      Name: [Your Teacher Name]<br>
+      Course: BUSM 371<br>
+      Role: Instructor
+    `;
+  }
+
+  if (type === "developer") {
+    box.innerHTML = `
+      <b>Developer</b><br>
+      Name: Weisheng Ng<br>
+      Major: IT<br>
+      Project: Tron AI Directory
+    `;
+  }
+}
   </script>
 
 </body>
+  
 </html>
   
 
