@@ -605,7 +605,7 @@ function addMessage(text) {
 async function processAI(input) {
   try {
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=AIzaSyB-_BJ2XMGxYyJ513Zw4keKx0EEOJq4VBg",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyB-_BJ2XMGxYyJ513Zw4keKx0EEOJq4VBg",
       {
         method: "POST",
         headers: {
@@ -614,7 +614,8 @@ async function processAI(input) {
         body: JSON.stringify({
           contents: [
             {
-              parts: [{ text: "You are a Tron-style AI assistant. " + input }]
+              role: "user",
+              parts: [{ text: input }]
             }
           ]
         })
@@ -623,12 +624,16 @@ async function processAI(input) {
 
     const data = await response.json();
 
-    console.log("AI response:", data); // 👈 ADD THIS
+    console.log("AI response:", data);
+
+    if (data.error) {
+      return "API Error: " + data.error.message;
+    }
 
     return data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
 
   } catch (error) {
-    console.error(error); // 👈 ADD THIS
+    console.error(error);
     return "System error. Try again.";
   }
 }
