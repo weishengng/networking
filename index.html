@@ -582,16 +582,30 @@ typeEffect();
     const chatBox = document.getElementById("chatBox");
 const aiInput = document.getElementById("aiInput");
 
+let isLoading = false;
+
 aiInput.addEventListener("keypress", async function(e) {
-  if (e.key === "Enter") {
+  if (e.key === "Enter" && !isLoading) {
+    isLoading = true;
+
     const userText = aiInput.value;
     addMessage("YOU: " + userText);
 
+    addMessage("AI: thinking...");
+
     const response = await processAI(userText);
+
+    // remove "thinking..."
+    chatBox.lastChild.remove();
 
     addMessage("AI: " + response);
 
     aiInput.value = "";
+
+    // cooldown (2 seconds)
+    setTimeout(() => {
+      isLoading = false;
+    }, 2000);
   }
 });
 
@@ -627,7 +641,9 @@ async function processAI(input) {
     console.log("AI response:", data);
 
     if (data.error) {
-      return "API Error: " + data.error.message;
+      // retry delay
+      await new Promise(r => setTimeout(r, 1500));
+      return "System busy. Try again in a moment.";
     }
 
     return data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
