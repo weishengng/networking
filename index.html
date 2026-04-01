@@ -298,7 +298,7 @@
 
     .intro-panel {
   position: absolute;
-  top: 80px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -328,6 +328,19 @@
   box-shadow: 0 0 15px #00eaff;
   background: rgba(0,0,0,0.9);
   width: 300px;
+  position: relative;
+}
+    .close-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  color: #00eaff;
+  font-size: 14px;
+}
+
+.close-btn:hover {
+  color: red;
 }
   </style>
 </head>
@@ -339,7 +352,8 @@
     <button onclick="showInfo('developer')">Developer</button>
   
     <div id="introBox" class="intro-box">
-      Select a button to view info
+      <span class="close-btn" onclick="closeIntro()">✕</span>
+      <div id="introContent">Select a button to view info</div>
     </div>
   </div>
   
@@ -750,25 +764,30 @@ aiTab.onclick = () => {
 });
 
     function showInfo(type) {
-  const box = document.getElementById("introBox");
+  const content = document.getElementById("introContent");
+
+  document.getElementById("introBox").style.display = "block";
 
   if (type === "teacher") {
-    box.innerHTML = `
-      <b>Teacher</b><br>
-      Name: [Your Teacher Name]<br>
+    content.innerHTML = `
+      <b>professorTeacher</b><br>
+      Name: PJ Roger<br>
       Course: BUSM 371<br>
       Role: Instructor
     `;
   }
 
   if (type === "developer") {
-    box.innerHTML = `
+    content.innerHTML = `
       <b>Developer</b><br>
       Name: Weisheng Ng<br>
       Major: IT<br>
       Project: Tron AI Directory
     `;
   }
+}
+    function closeIntro() {
+  document.getElementById("introBox").style.display = "none";
 }
   </script>
 
