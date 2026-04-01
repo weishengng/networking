@@ -152,6 +152,8 @@
     0 0 10px #00eaff,
     0 0 20px #00eaff,
     0 0 40px #00eaff;
+
+  animation: titleGlow 2s infinite;
 }
 
     .header {
@@ -177,13 +179,40 @@
   50% { text-shadow: 0 0 25px #00eaff; }
 }
 
-.main-title {
-  animation: glowPulse 2s infinite;
-}
-
     @keyframes flicker {
   0%, 100% { opacity: 0.7; }
   50% { opacity: 1; }
+}
+    .search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #00eaff;
+  border-radius: 6px;
+  background: black;
+  color: #00eaff;
+  font-family: 'Orbitron', sans-serif;
+
+  box-shadow: 0 0 10px #00eaff;
+}
+
+.search-bar::placeholder {
+  color: #00eaff88;
+}
+
+.search-bar:focus {
+  outline: none;
+  box-shadow: 0 0 20px #00eaff;
+}
+    .sub-title::after {
+  content: "|";
+  margin-left: 5px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
 }
   </style>
 </head>
@@ -191,10 +220,10 @@
 <body>
   <div class="header">
   <h1 class="main-title">BUSM 371</h1>
-  <p class="sub-title">SYSTEM ONLINE</p>
-</div>
+  <p class="sub-title" id="systemText"></p></div>
   <div class="sidebar">
     <h2>Classmates</h2>
+    <input type="text" id="search" placeholder="Search..." class="search-bar">
     <div id="list"></div>
   </div>
 
@@ -441,6 +470,31 @@
 
       listDiv.appendChild(div);
     });
+    const searchInput = document.getElementById("search");
+
+searchInput.addEventListener("input", () => {
+  const value = searchInput.value.toLowerCase();
+
+  document.querySelectorAll(".name").forEach((item) => {
+    item.style.display = item.innerText.toLowerCase().includes(value)
+      ? "block"
+      : "none";
+  });
+});
+    const text = "SYSTEM ONLINE";
+const target = document.getElementById("systemText");
+
+let i = 0;
+
+function typeEffect() {
+  if (i < text.length) {
+    target.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 80);
+  }
+}
+
+typeEffect();
   </script>
 
 </body>
