@@ -668,6 +668,8 @@ async function processAI(input) {
 
     const data = await response.json();
 
+    console.log("FULL DATA:", data); // 👈 ADD THIS
+
     return data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
 
   } catch (error) {
