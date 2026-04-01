@@ -658,7 +658,7 @@ function addMessage(text) {
 
 async function processAI(input, retry = 1) {
   try {
-    const response = await fetch("http://localhost:3000/ai", {
+    const response = await fetch("https://tron-backend-i9k1.onrender.com/ai", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
