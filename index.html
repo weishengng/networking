@@ -401,13 +401,10 @@
     
       /* Intro panel fix */
       .intro-panel {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        width: auto;
+        position: static;          /* 👈 VERY IMPORTANT */
         display: flex;
-        gap: 6px;
-        z-index: 1000;
+        gap: 8px;
+        justify-content: flex-end; /* 👈 push to right */
       }
     
       /* AI panel stays floating (NOT full width) */
