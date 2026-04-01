@@ -672,7 +672,7 @@ async function processAI(input, retry = 1) {
       return await processAI(input, retry - 1);
     }
 
-    return data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
+    return data.reply || "No response.";
 
   } catch (error) {
     return "Server error.";
