@@ -342,6 +342,14 @@
 .close-btn:hover {
   color: red;
 }
+    .intro-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 2px solid #00eaff;
+  box-shadow: 0 0 10px #00eaff;
+}
   </style>
 </head>
 
@@ -763,15 +771,15 @@ aiTab.onclick = () => {
 };
 });
 
-    function showInfo(type) {
+   function showInfo(type) {
   const content = document.getElementById("introContent");
-
   document.getElementById("introBox").style.display = "block";
 
   if (type === "teacher") {
     content.innerHTML = `
-      <b>professorTeacher</b><br>
-      Name: PJ Roger<br>
+      <img src="images/professor.jpg" class="intro-img"><br>
+      <b>Teacher</b><br>
+      Name: [Professor Name]<br>
       Course: BUSM 371<br>
       Role: Instructor
     `;
@@ -779,6 +787,7 @@ aiTab.onclick = () => {
 
   if (type === "developer") {
     content.innerHTML = `
+      <img src="images/me.jpg" class="intro-img"><br>
       <b>Developer</b><br>
       Name: Weisheng Ng<br>
       Major: IT<br>
