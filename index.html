@@ -217,6 +217,7 @@
   25%, 75% { opacity: 0; }
 }
  .ai-panel {
+  transition: all 0.3s ease;
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -703,17 +704,21 @@ async function processAI(input) {
 
   // minimize
   minBtn.onclick = () => {
-    aiPanel.style.height = "300px";
-    chatBox.style.display = "block";
-    aiInput.style.display = "block";
-    aiTab.style.display = "block";
-  };
+  aiPanel.style.transform = "scale(0)";
+  aiPanel.style.opacity = "0";
 
-  // restore
-  aiTab.onclick = () => {
-    aiPanel.style.display = "flex";
-    aiTab.style.display = "none";
-  };
+  setTimeout(() => {
+    aiPanel.style.display = "none";
+    aiTab.style.display = "block";
+  }, 300);
+};
+
+aiTab.onclick = () => {
+  aiPanel.style.display = "flex";
+  aiPanel.style.transform = "scale(1)";
+  aiPanel.style.opacity = "1";
+  aiTab.style.display = "none";
+};
 });
   </script>
 
