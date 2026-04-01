@@ -3,18 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <title>Classmate Directory</title>
+
+  <!-- Tron Font -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
+    /* BODY + TRON BACKGROUND */
     body {
       margin: 0;
       display: flex;
       height: 100vh;
       font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle at top, #020617, #000000);
       color: #00eaff;
+      overflow: hidden;
+      background: black;
     }
-  
-    /* Sidebar */
+
+    /* GRID ANIMATION */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background:
+        linear-gradient(#00eaff22 1px, transparent 1px),
+        linear-gradient(90deg, #00eaff22 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: moveGrid 20s linear infinite;
+      z-index: 0;
+    }
+
+    /* DARK OVERLAY */
+    body::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, transparent, #000 80%);
+      z-index: 0;
+    }
+
+    @keyframes moveGrid {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-200px, -200px); }
+    }
+
+    /* MAKE CONTENT ABOVE GRID */
+    .sidebar, .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* SIDEBAR */
     .sidebar {
       width: 30%;
       background: rgba(0, 0, 0, 0.9);
@@ -23,15 +63,13 @@
       overflow-y: auto;
       padding: 15px;
     }
-  
+
     .sidebar h2 {
       text-align: center;
-      color: #00eaff;
       text-shadow: 0 0 10px #00eaff;
-      letter-spacing: 2px;
     }
-  
-    /* Name list */
+
+    /* NAME LIST */
     .name {
       padding: 12px;
       margin: 8px 0;
@@ -41,22 +79,22 @@
       transition: 0.3s;
       background: rgba(0, 234, 255, 0.05);
     }
-  
+
     .name:hover {
       background: #00eaff;
       color: black;
       box-shadow: 0 0 15px #00eaff;
       transform: translateX(8px);
     }
-  
+
     .name.active {
       background: #00eaff;
       color: black;
       font-weight: bold;
       box-shadow: 0 0 20px #00eaff;
     }
-  
-    /* Content area */
+
+    /* CONTENT */
     .content {
       width: 70%;
       padding: 30px;
@@ -64,8 +102,8 @@
       justify-content: center;
       align-items: center;
     }
-  
-    /* Card */
+
+    /* CARD */
     .card {
       width: 100%;
       max-width: 550px;
@@ -73,30 +111,35 @@
       border: 2px solid #00eaff;
       border-radius: 12px;
       background: rgba(0, 234, 255, 0.05);
-      box-shadow: 
+      box-shadow:
         0 0 10px #00eaff,
         inset 0 0 20px rgba(0, 234, 255, 0.2);
       backdrop-filter: blur(10px);
+      animation: glowPulse 2s infinite;
     }
-  
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 10px #00eaff; }
+      50% { box-shadow: 0 0 25px #00eaff; }
+    }
+
     .card h3 {
-      margin-top: 0;
       text-align: center;
       text-shadow: 0 0 10px #00eaff;
-      letter-spacing: 1px;
     }
-  
+
     .card p {
       margin: 12px 0;
       border-bottom: 1px solid rgba(0,234,255,0.2);
       padding-bottom: 5px;
     }
-  
+
     .card b {
       color: #7dd3fc;
     }
   </style>
 </head>
+
 <body>
 
   <div class="sidebar">
@@ -105,14 +148,13 @@
   </div>
 
   <div class="content">
-    <h2>Information</h2>
     <div class="card" id="info">
       Click a name to see details
     </div>
   </div>
 
   <script>
-  const classmates = [
+    const classmates = [
   {
     name: "Amaya Rogers",
     country: "South Korea",
@@ -329,9 +371,13 @@
     classmates.forEach((person, index) => {
       const div = document.createElement("div");
       div.className = "name";
-      div.innerHTML = `<span style="color:#00eaff; text-shadow:0 0 8px #00eaff;">${index + 1}.</span> ${person.name}`;
+
+      div.innerHTML = `<span style="text-shadow:0 0 8px #00eaff;">${index + 1}.</span> ${person.name}`;
 
       div.onclick = () => {
+        document.querySelectorAll(".name").forEach(n => n.classList.remove("active"));
+        div.classList.add("active");
+
         infoDiv.innerHTML = `
           <h3>${person.name}</h3>
           <p><b>Country:</b> ${person.country}</p>
@@ -348,3 +394,6 @@
 
 </body>
 </html>
+  
+
+  
