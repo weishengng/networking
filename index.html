@@ -216,17 +216,20 @@
   0%, 50%, 100% { opacity: 1; }
   25%, 75% { opacity: 0; }
 }
-    .ai-panel {
+ .ai-panel {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  width: 260px;
-  background: rgba(0,0,0,0.9);
+  width: 320px;
+  height: 300px;
+  background: rgba(0,0,0,0.95);
   border: 1px solid #00eaff;
-  box-shadow: 0 0 15px #00eaff;
+  box-shadow: 0 0 20px #00eaff;
   padding: 10px;
   font-size: 12px;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
 }
 
 .ai-header {
@@ -241,8 +244,10 @@
   margin-bottom: 8px;
 }
 
-.ai-chat div {
-  margin: 4px 0;
+.ai-chat {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 8px;
 }
 
 #aiInput {
@@ -259,6 +264,32 @@
   border: 2px solid #00eaff;
   display: block;
   margin: 0 auto 10px;
+  box-shadow: 0 0 15px #00eaff;
+}
+    .ai-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-shadow: 0 0 10px #00eaff;
+}
+
+#minBtn {
+  background: black;
+  border: 1px solid #00eaff;
+  color: #00eaff;
+  cursor: pointer;
+  padding: 2px 8px;
+}
+    .ai-tab {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  border: 1px solid #00eaff;
+  padding: 8px 12px;
+  color: #00eaff;
+  cursor: pointer;
+  display: none;
   box-shadow: 0 0 15px #00eaff;
 }
   </style>
@@ -280,11 +311,17 @@
     </div>
   </div>
 
-  <div class="ai-panel">
-    <div class="ai-header">AI SYSTEM</div>
-    <div class="ai-chat" id="chatBox"></div>
-    <input type="text" id="aiInput" placeholder="Ask something..." />
+  <div class="ai-panel" id="aiPanel">
+  <div class="ai-header">
+    AI SYSTEM
+    <button id="minBtn">—</button>
   </div>
+  <div class="ai-chat" id="chatBox"></div>
+  <input type="text" id="aiInput" placeholder="Ask something..." />
+</div>
+
+<!-- minimized tab -->
+<div class="ai-tab" id="aiTab">AI</div>
 
   <script>
     const classmates = [
@@ -653,6 +690,22 @@ async function processAI(input) {
     return "System error. Try again.";
   }
 }
+
+    const aiPanel = document.getElementById("aiPanel");
+const aiTab = document.getElementById("aiTab");
+const minBtn = document.getElementById("minBtn");
+
+// minimize
+minBtn.onclick = () => {
+  aiPanel.style.display = "none";
+  aiTab.style.display = "block";
+};
+
+// restore
+aiTab.onclick = () => {
+  aiPanel.style.display = "flex";
+  aiTab.style.display = "none";
+};
   </script>
 
 </body>
