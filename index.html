@@ -142,7 +142,7 @@
     }
 
    .main-title {
-  position: absolute;
+  position: static;
   top: 15px;
   right: 30px;
   font-size: 22px;
@@ -163,8 +163,10 @@
   position: absolute;
   top: 15px;
   right: 30px;
-  text-align: right;
-  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .sub-title {
@@ -405,6 +407,7 @@
         display: flex;
         gap: 8px;
         justify-content: flex-end; /* 👈 push to right */
+        margin-top: 8px;
       }
     
       /* AI panel stays floating (NOT full width) */
